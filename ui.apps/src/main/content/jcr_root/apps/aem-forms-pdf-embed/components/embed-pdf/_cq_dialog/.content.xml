@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root
+    xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    xmlns:granite="http://www.adobe.com/jcr/granite/1.0"
+    xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    xmlns:cq="http://www.day.com/jcr/cq/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Embed PDF"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/container">
+
+        <items jcr:primaryType="nt:unstructured">
+            <basic
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container"
+                jcr:title="Basic">
+
+                <items jcr:primaryType="nt:unstructured">
+
+                    <apiKey
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="Adobe PDF Embed API Client ID"
+                        fieldDescription="Enter the Client ID used to initialize the Adobe PDF Embed API."
+                        name="./apiKey"
+                        required="{Boolean}true"/>
+
+                    <endpoint
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="PDF Generation Endpoint"
+                        fieldDescription="Enter the endpoint that accepts document data and returns a PDF."
+                        name="./endpoint"
+                        required="{Boolean}true"/>
+
+                    <pdfGenerationType
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                        fieldLabel="PDF Generation Type"
+                        name="./pdfGenerationType"
+                        granite:class="cq-dialog-dropdown-showhide">
+
+                        <granite:data
+                            jcr:primaryType="nt:unstructured"
+                            cq-dialog-dropdown-showhide-target=".pdf-generation-toggle"/>
+
+                        <items jcr:primaryType="nt:unstructured">
+                            <ic
+                                jcr:primaryType="nt:unstructured"
+                                text="Interactive Communication (IC)"
+                                value="IC"
+                                selected="{Boolean}true"/>
+
+                            <dataMerge
+                                jcr:primaryType="nt:unstructured"
+                                text="PDF Data Merge (XDP)"
+                                value="DATA_MERGE"/>
+                        </items>
+                    </pdfGenerationType>
+
+                    <documentIdContainer
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        granite:class="hide pdf-generation-toggle">
+
+                        <granite:data
+                            jcr:primaryType="nt:unstructured"
+                            showhidetargetvalue="IC"/>
+
+                        <items jcr:primaryType="nt:unstructured">
+                            <documentId
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="IC Document ID"
+                                fieldDescription="Enter the Interactive Communication document identifier."
+                                name="./documentId"
+                                required="{Boolean}false"/>
+                        </items>
+                    </documentIdContainer>
+
+                    <templateNameContainer
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/container"
+                        granite:class="hide pdf-generation-toggle">
+
+                        <granite:data
+                            jcr:primaryType="nt:unstructured"
+                            showhidetargetvalue="DATA_MERGE"/>
+
+                        <items jcr:primaryType="nt:unstructured">
+
+                            <templateName
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/pathfield"
+                                fieldLabel="XDP Template"
+                                fieldDescription="Browse and select an XDP template from the AEM repository."
+                                name="./templateName"
+                                rootPath="/content/dam/formsanddocuments"
+                                forceSelection="{Boolean}true"
+                                required="{Boolean}false"/>
+
+                            <rootElement
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                                fieldLabel="XML Root Element"
+                                fieldDescription="Enter the XML hierarchy expected by the XDP template, for example: form1/registrationform."
+                                name="./rootElement"
+                                emptyText="formData"
+                                required="{Boolean}false"/>
+
+                        </items>
+                    </templateNameContainer>
+
+                    <pdfFileName
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldLabel="PDF File Name"
+                        fieldDescription="Filename used for the generated PDF."
+                        name="./pdfFileName"
+                        emptyText="generated.pdf"
+                        required="{Boolean}true"/>
+
+                    <embedMode
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                        fieldLabel="Embed Mode"
+                        name="./embedMode">
+
+                        <items jcr:primaryType="nt:unstructured">
+                            <fullWindow
+                                jcr:primaryType="nt:unstructured"
+                                text="Full Window"
+                                value="FULL_WINDOW"/>
+
+                            <sizedContainer
+                                jcr:primaryType="nt:unstructured"
+                                text="Sized Container"
+                                value="SIZED_CONTAINER"
+                                selected="{Boolean}true"/>
+
+                            <inlineMode
+                                jcr:primaryType="nt:unstructured"
+                                text="Inline"
+                                value="IN_LINE"/>
+
+                            <lightBox
+                                jcr:primaryType="nt:unstructured"
+                                text="Lightbox"
+                                value="LIGHT_BOX"/>
+                        </items>
+                    </embedMode>
+
+                    <viewerHeight
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                        fieldLabel="Viewer Height (px)"
+                        fieldDescription="Height of the PDF viewer in pixels."
+                        name="./viewerHeight"
+                        value="800"
+                        min="200"
+                        step="50"/>
+
+                </items>
+            </basic>
+        </items>
+    </content>
+</jcr:root>

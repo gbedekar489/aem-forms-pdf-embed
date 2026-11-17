@@ -1,0 +1,6 @@
+{
+  "tokenUrl": "https://ims-na1.adobelogin.com/ims/token/v3",
+  "clientId": "$[env:IC_OAUTH_CLIENT_ID]",
+  "clientSecret": "$[secret:IC_OAUTH_CLIENT_SECRET]",
+  "scopes": "$[env:IC_OAUTH_SCOPES]"
+}

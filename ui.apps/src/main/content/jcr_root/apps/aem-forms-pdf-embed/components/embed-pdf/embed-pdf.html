@@ -1,0 +1,22 @@
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html">
+    <sly data-sly-call="${clientlib.js @ categories='aemformspdfembed.embedpdf'}"/>
+    <sly data-sly-call="${clientlib.css @ categories='aemformspdfembed.embedpdf'}"/>
+</sly>
+
+<div class="embed-pdf"
+     data-api-key="${properties.apiKey @ context='attribute'}"
+     data-endpoint="${properties.endpoint @ context='attribute'}"
+     data-document-id="${properties.documentId @ context='attribute'}"
+     data-pdf-generation-type="${properties.pdfGenerationType @ context='attribute'}"
+     data-template-name="${properties.templateName @ context='attribute'}"
+     data-pdf-file-name="${properties.pdfFileName @ context='attribute'}"
+     data-root-element="${properties.rootElement @ context='attribute'}"
+     data-embed-mode="${properties.embedMode @ context='attribute'}">
+
+    <div class="embed-pdf__viewer"
+         id="adobe-dc-view-${resource.name}"
+         data-viewer-height="${properties.viewerHeight || 800}">
+    </div>
+
+</div>
